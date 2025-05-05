@@ -4,13 +4,15 @@ import {convertToWebP} from './imageProcessing/imageProcessing.js';
 
 import chalk from 'chalk';
 import fs from 'fs/promises';
+import dotenv from 'dotenv';
+dotenv.config()
 
 const blogFilePath = './blogs.json';
 const listingFilePath = './listings.json';
 const landingFilePath = './landingpages.json';
 
-const SOURCE_BUCKET = 'temp-lym-listing-images';
-const DEST_BUCKET = 'production-lym-images-bucket';
+const SOURCE_BUCKET = process.env.AWS_SOURCE_BUCKET;
+const DEST_BUCKET = process.env.AWS_DESTINATION_BUCKET;
 
 function getKeyFromUrl(url) {
     const urlParts = url.split('/');
